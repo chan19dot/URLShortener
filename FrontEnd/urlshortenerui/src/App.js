@@ -1,19 +1,37 @@
 import "./App.css";
 import CopyToClipboard from "react-copy-to-clipboard";
-import { Box, Button, SvgIcon, TextField } from "@mui/material";
+import {  Button, TextField, Typography } from "@mui/material";
 import { useState } from "react";
 import axios from "axios";
 function App() {
-  const shortenedUrl = "asdf.com/sas";
 
+  const apiEndpoint= process.env.REACT_APP_API_ENDPOINT;
   const [url, setUrl] = useState("");
+  const [shortUrl, setShortUrl]= useState("");
 
   const handleUrlChange = (evt) => {
     setUrl(evt.target.value);
   };
-  const handleSubmitUrl = () => {
-    console.log(url);
-    // axios.post()
+  const handleSubmitUrl = async() => {
+    try{
+      const resp = await axios.post(apiEndpoint+"getShortenedUrl", {
+        url:url
+      })
+      if(resp.data){
+        if(resp.data.isDuplicate){
+          alert("This URL is already present and the same short URL is provided here:");
+        }
+        else{
+          setShortUrl(resp.data.shortenedUrl);
+        }
+      }
+      
+    }
+    catch(error){
+      console.error(error);
+    }
+    
+    
   };
 
   return (
@@ -41,12 +59,9 @@ function App() {
 
         <div>
           <span>
-            <TextField
-              variant="outlined"
-              value={shortenedUrl}
-              readOnly
-            ></TextField>
-            <CopyToClipboard text={url}>
+            <Typography> {shortUrl}</Typography>
+            
+            <CopyToClipboard text={shortUrl}>
               <Button
                 style={{ marginTop: "1.5vw" }}
                 variant="contained"
