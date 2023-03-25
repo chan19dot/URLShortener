@@ -6,7 +6,6 @@ div {
   margin: 1vw;
 }
 
-
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -42,6 +41,6 @@ div {
   }
 }
 
-.textTransformNone{
+.textTransformNone {
   text-transform: none;
 }
