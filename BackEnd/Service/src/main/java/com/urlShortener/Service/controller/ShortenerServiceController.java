@@ -1,14 +1,34 @@
 package com.urlShortener.Service.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.urlShortener.Service.model.UrlEntity;
+import com.urlShortener.Service.service.UrlShortenerService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
-@RestController("/shortnerService")
+import java.util.List;
+
+@RestController
 public class ShortenerServiceController {
 
-    @GetMapping("/getShortenedUrl")
-    public String getUrl(){
+    @Autowired
+    UrlShortenerService urlShortenerService;
+
+    @PostMapping("/getShortenedUrl/{url}")
+    public String getUrl(@PathVariable String url){
+        System.out.println(url);
         return "URL IS WORKING";
+    }
+
+    @GetMapping("/redirect/{id}")
+    public RedirectView gotoId(@PathVariable String id){
+        RedirectView redirectView = new RedirectView();
+        redirectView.setUrl("https://"+id);
+        return redirectView;
+    }
+
+    @GetMapping("/finAll")
+    public List<UrlEntity> getAll(){
+        return urlShortenerService.getUrls();
     }
 }
