@@ -12,11 +12,11 @@ To install the back-end server, navigate to the backEnd/Service directory and ru
 by using the following command you can run the application
 mvn spring-boot:run
 
-##Env variables
+## Env variables
 Please provide .env file in react with REACT_API_END_POINT pointing to the local server address ex: "http://localhost:8080/"
 In application.properties please provide mongodb connection uri
 
-##MongoDB Schema:
+## MongoDB Schema:
 {
   $jsonSchema: {
     bsonType: 'object',
@@ -39,5 +39,5 @@ In application.properties please provide mongodb connection uri
   }
 }
 
-##Contributors
+## Contributors
 Srichandan Yerragudi
