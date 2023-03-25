@@ -3,7 +3,7 @@ This is a simple URL shortener project that allows you to create short URLs for 
 
 # Installation
 ## Front-end
-To install the front-end client, navigate to the frontRnd directory and run npm install to install the required dependencies 
+To install the front-end client, navigate to the frontEnd/urlShortenerui directory and run npm install to install the required dependencies 
 by using the following command you can run the application:
 npm start   
 
@@ -38,6 +38,11 @@ In application.properties please provide mongodb connection uri
     }
   }
 }
+
+## Scope to improve:
+1. Add a token to validate the request
+2. Build a more cleaner UI
+3. Deploy these as AWS lambdas 
 
 ## Contributors
 Srichandan Yerragudi
