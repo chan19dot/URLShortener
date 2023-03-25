@@ -18,5 +18,4 @@ public class UrlEntity {
     private String url;
     private String shortenedUrl;
     private LocalDateTime timestamp;
-    private String uuid;
 }

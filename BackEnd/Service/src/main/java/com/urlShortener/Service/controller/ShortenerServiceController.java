@@ -6,29 +6,30 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Map;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 public class ShortenerServiceController {
 
     @Autowired
     UrlShortenerService urlShortenerService;
 
-    @PostMapping("/getShortenedUrl/{url}")
-    public String getUrl(@PathVariable String url){
-        System.out.println(url);
-        return "URL IS WORKING";
+    @PostMapping("/getShortenedUrl")
+    public Map getUrl(@RequestBody() Map<String,String>params){
+        return urlShortenerService.createUrl(params.get("url"));
     }
 
-    @GetMapping("/redirect/{id}")
-    public RedirectView gotoId(@PathVariable String id){
-        RedirectView redirectView = new RedirectView();
-        redirectView.setUrl("https://"+id);
-        return redirectView;
+    @GetMapping("/{shortenedUrl}")
+    public RedirectView gotoUrl(@PathVariable String shortenedUrl, HttpServletRequest request){
+        return urlShortenerService.redirectToActualUrl(shortenedUrl, request);
     }
 
     @GetMapping("/finAll")
     public List<UrlEntity> getAll(){
         return urlShortenerService.getUrls();
     }
+
 }
